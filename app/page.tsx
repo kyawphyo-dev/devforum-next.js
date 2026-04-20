@@ -1,11 +1,11 @@
+import Navbar from "@/components/Navbar";
+import SideBar from "@/components/SideBar";
+
 function page() {
   return (
     <>
-      <div className="flex justify-between">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-      </div>
+      <Navbar />
+      <SideBar />
     </>
   );
 }
