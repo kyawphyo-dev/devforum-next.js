@@ -7,9 +7,16 @@ function AuthForm() {
       <Button type="button" icon={FaGoogle} style="outline">
         Google
       </Button>
-      <Button type="button" icon={FaGithub} style="outline">
-        Github
-      </Button>
+      <form
+        action={async () => {
+          "use server";
+          console.log("server action active");
+        }}
+      >
+        <Button type="button" icon={FaGithub} style="outline">
+          Github
+        </Button>
+      </form>
     </div>
   );
 }
