@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
+import ToastContainer from "@/components/ToastContainer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default async function RootLayout({
     >
       <body className="  min-h-screen flex flex-col bg-bg text-white">
         <SessionProvider session={session}>{children}</SessionProvider>
+        <ToastContainer />
       </body>
     </html>
   );
