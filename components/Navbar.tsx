@@ -2,8 +2,10 @@ import Image from "next/image";
 import logo from "../public/devlogo-removebg.png";
 import Link from "next/link";
 import globe from "../public/globe.svg";
-import Input from "../components/Input";
+import SearchInput from "../components/SearchInput";
 import ROUTES from "@/routes";
+import { Suspense } from "react";
+
 function Navbar() {
   return (
     <div className="flex justify-between px-10 py-3 items-center">
@@ -19,7 +21,13 @@ function Navbar() {
         </Link>
       </div>
       <div className="w-150">
-        <Input type="text" placeholder="Search" id="search" />
+        <Suspense
+          fallback={
+            <div className="h-10 w-full bg-input-background animate-pulse rounded-md" />
+          }
+        >
+          <SearchInput />
+        </Suspense>
       </div>
       <div>
         <Image
