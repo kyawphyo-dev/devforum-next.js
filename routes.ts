@@ -4,6 +4,7 @@ const ROUTES = {
   REGISTER: "/register",
   DASHBOARD: "/dashboard",
   CATEGORIES: "/categories",
+  QUESTIONS: "/questions",
 };
 
 export default ROUTES;
