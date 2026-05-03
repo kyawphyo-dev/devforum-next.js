@@ -10,7 +10,7 @@ function layout({ children }: { children: ReactNode }) {
       <div className="flex mt-5">
         <SideBar />
         <div className="w-3/5">{children}</div>
-        <div className="w-1/5 border-l border-primary">
+        <div className="w-1/5 ">
           <RightSideBar />
         </div>
       </div>

@@ -8,7 +8,7 @@ import ROUTES from "@/routes";
 
 function SideBar() {
   return (
-    <div className="w-1/5 border-r border-primary">
+    <div className="w-1/5 my-12">
       <ul className="flex flex-col items-center px-5 space-y-1">
         <li className="text-white px-4 w-full py-3 bg-secondary rounded-sm hover:bg-hover cursor-pointer ">
           <Link href={ROUTES.HOME} className="flex items-center">

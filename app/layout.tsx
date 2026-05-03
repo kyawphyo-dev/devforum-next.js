@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Next Project",
-  description: "A Next.js project to practice",
+  title: "Dev Forum",
+  description: "A Next.js project to practice building a forum website",
 };
 
 export default async function RootLayout({

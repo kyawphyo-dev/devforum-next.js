@@ -1,7 +1,9 @@
 import { auth } from "@/auth";
 import Button from "@/components/Button";
+import ButtonLink from "@/components/ButtonLink";
 import Filter from "@/components/Filter";
 import ThreadCard from "@/components/ThreadCard";
+import ROUTES from "@/routes";
 
 const MOCK_THREADS = [
   {
@@ -64,7 +66,7 @@ async function page({
       <div className="flex justify-between items-center">
         <h3 className="text-2xl font-bold">All Threads</h3>
         <div className="w-1/3">
-          <Button>Create Thread</Button>
+          <ButtonLink href={ROUTES.QUESTIONS}>Create Thread</ButtonLink>
         </div>
       </div>
       <Filter />

@@ -1,6 +1,6 @@
 function RightSideBar() {
   return (
-    <div>
+    <div className=" my-12">
       <h3>Right SideBar</h3>
     </div>
   );
