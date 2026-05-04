@@ -17,21 +17,21 @@ function SideBar() {
           </Link>
         </li>
 
-        <li className="text-white px-4 w-full py-3  rounded-sm hover:bg-hover cursor-pointer">
+        <li className="text-secondary px-4 w-full py-3 hover:text-white  rounded-sm hover:bg-hover cursor-pointer">
           <Link href="/" className="flex items-center">
-            <FaChartLine className="text-secondary" />
+            <FaChartLine />
             <span className="ms-2">Popular</span>
           </Link>
         </li>
-        <li className="text-white px-4 w-full py-3  rounded-sm hover:bg-hover cursor-pointer">
+        <li className="text-secondary hover:text-white px-4 w-full py-3  rounded-sm hover:bg-hover cursor-pointer">
           <Link href={ROUTES.CATEGORIES} className="flex items-center">
-            <MdOutlineCategory className="text-secondary" />
+            <MdOutlineCategory className="" />
             <span className="ms-2">Categories</span>
           </Link>
         </li>
-        <li className="text-white px-4 w-full py-3  rounded-sm hover:bg-hover cursor-pointer">
+        <li className="text-secondary hover:text-white px-4 w-full py-3  rounded-sm hover:bg-hover cursor-pointer">
           <Link href="/" className="flex items-center">
-            <BiCategory className="text-secondary" />
+            <BiCategory />
             <span className="ms-2">All</span>
           </Link>
         </li>
