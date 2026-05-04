@@ -46,7 +46,7 @@ function RightSideBar() {
             <Link
               key={question.id}
               href={question.link}
-              className="group flex items-start justify-between gap-3 text-secondary-text hover:text-accent hover:border-b hover:pb-3 border-border transition-colors duration-200 cursor-pointer"
+              className="group flex items-start justify-between gap-3 text-secondary-text hover:text-accent hover:-translate-y-1 hover:pb-3 border-border transition-all duration-300 cursor-pointer"
             >
               <span className="text-sm leading-snug line-clamp-2">
                 {question.title}
