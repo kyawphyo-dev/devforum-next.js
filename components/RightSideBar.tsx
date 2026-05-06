@@ -46,12 +46,12 @@ function RightSideBar() {
             <Link
               key={question.id}
               href={question.link}
-              className="group flex items-start justify-between gap-3 text-secondary-text hover:text-accent hover:-translate-y-1 hover:pb-3 border-border transition-all duration-300 cursor-pointer"
+              className="group flex items-start justify-between gap-3 text-secondary-text hover:text-lg hover:text-accent hover:-translate-x-1 hover:pb-3 border-border transition-all duration-300 cursor-pointer"
             >
               <span className="text-sm leading-snug line-clamp-2">
                 {question.title}
               </span>
-              <FaChevronRight className="mt-1 text-xs text-border group-hover:text-accent shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
+              <FaChevronRight className="mt-1 text-xs text-border group-hover:text-accent shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           ))}
         </div>
