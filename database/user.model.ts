@@ -5,14 +5,14 @@ export interface IUser {
   username: string;
   email: string;
   password: string;
-  provider: string;
-  providerId: string;
+  provider?: string;
+  providerId?: string;
   bio?: string;
-  image: string;
+  image?: string;
   role: string;
   location?: string;
   portfolio?: string;
-  reputation: number;
+  reputation?: number;
 }
 
 export interface IUserDoc extends IUser, Document {}
@@ -41,19 +41,16 @@ const UserSchema = new Schema(
     },
     provider: {
       type: String,
-      required: true,
     },
     providerId: {
       type: String,
-      required: true,
     },
     image: {
       type: String,
-      required: true,
     },
     role: {
       type: String,
-      required: true,
+      default: "user",
     },
     bio: {
       type: String,
