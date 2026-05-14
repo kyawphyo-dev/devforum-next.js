@@ -19,6 +19,14 @@ export const api = {
     // api.users.getById("123")
     getById: (id: string) => fetchHandler(API_URL + "/users/" + id),
 
+    // Get user by email
+    // api.users.getByEmail("john@example.com")
+    getByEmail: (email: string) =>
+      fetchHandler(API_URL + "/users/email/", {
+        method: "POST",
+        body: JSON.stringify({ email }),
+      }),
+
     // Update user by ID
     // api.users.update("123", { name: "Jane Doe", email: "jane@example.com" })
     update: (
@@ -30,11 +38,36 @@ export const api = {
         body: JSON.stringify(data),
       });
     },
+
     // Delete user by ID
     // api.users.delete("123")
     delete: (id: string) =>
       fetchHandler(API_URL + "/users/" + id, {
         method: "DELETE",
       }),
+  },
+
+  auth: {
+    // SignInWithOAuth
+    SignInWithOAuth: ({
+      provider,
+      providerAccountId,
+      user,
+    }: {
+      provider: string;
+      providerAccountId: string;
+      user: {
+        name: string;
+        username: string;
+        email: string;
+        image?: string;
+        password?: string;
+      };
+    }) => {
+      fetchHandler(API_URL + "/auth/signin_with_oauth", {
+        method: "POST",
+        body: JSON.stringify({ provider, providerAccountId, user }),
+      });
+    },
   },
 };
