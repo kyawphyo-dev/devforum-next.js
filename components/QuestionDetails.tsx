@@ -3,7 +3,7 @@ import { formatDistanceToNow } from "date-fns";
 import { AiOutlineLike } from "react-icons/ai";
 import { BiDislike } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa";
-import MarkDownPreview from "./MarkDownPreview";
+import Preview from "./MarkDownPreview";
 
 function QuestionDetails(props: IPopulatedAll) {
   const {
@@ -45,7 +45,7 @@ function QuestionDetails(props: IPopulatedAll) {
       </div>
 
       <div className="mt-6 prose">
-        <MarkDownPreview content={content} />
+        <Preview content={content} />
         {/* <pre>{content}</pre> */}
       </div>
 
