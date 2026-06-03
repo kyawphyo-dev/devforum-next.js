@@ -85,7 +85,7 @@ function ThreadCard(question: IPopulatedAll) {
               </div>
               <div className="flex items-center gap-1 hover:text-success transition-colors cursor-pointer">
                 <FaRegComment className="text-md" />
-                <span className="text-sm">{question?.answers?.length}</span>
+                <span className="text-sm">{question?.answersCount}</span>
               </div>
               <div className="flex items-center gap-1 hover:text-warning transition-colors cursor-pointer">
                 <MdOutlineVisibility className="text-lg" />

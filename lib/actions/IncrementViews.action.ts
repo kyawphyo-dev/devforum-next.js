@@ -1,3 +1,4 @@
+"use server";
 import Question from "@/database/question.model";
 import { errorAction } from "../response";
 import { IncrementViewsSchema } from "../schemas/IncrementViewsSchema";

@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import Answer from "@/database/answer.model";
+import Question from "@/database/question.model";
 import dbConnect from "@/lib/dbConnect";
 import { errorResponse, successResponse } from "@/lib/response";
 import { CreateAnswerSchema } from "@/lib/schemas/AnswerSchema";
@@ -38,6 +39,10 @@ export async function POST(req: Request) {
     const answer = await Answer.create({
       ...validatedData,
       author: session.user.id,
+    });
+
+    await Question.findByIdAndUpdate(validatedData.questionId, {
+      $inc: { answersCount: 1 },
     });
 
     return successResponse(answer, 201);

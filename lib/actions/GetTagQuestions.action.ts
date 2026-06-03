@@ -51,7 +51,7 @@ const GetTagQuestions = async (params: {
     const totalQuestions = await Question.countDocuments(filterQuery);
 
     const questions = await Question.find(filterQuery)
-      .select("_id title views answers upvotes downvotes author createdAt")
+      .select("_id title views answersCount upvotes downvotes author createdAt")
       .populate("author", "name image")
       .populate("tags", "name")
       .lean()
