@@ -27,7 +27,7 @@ export interface IQuestion {
   upvotes: number;
   downvotes: number;
   views: number;
-  answers?: Schema.Types.ObjectId[];
+  answersCount: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -35,23 +35,15 @@ export interface IQuestion {
 export interface IQuestionPopulated extends Omit<IQuestion, "tags"> {
   tags: ITag[];
 }
-export interface IAnswerPopulated extends Omit<IQuestion, "answers"> {
-  answer: IAnswer[];
-}
 
 export interface IAuthorPopulated extends Omit<IQuestion, "author"> {
   author: IAuthor[];
 }
 
-export interface IPopulatedAll extends Omit<
-  IQuestion,
-  "tags" | "author" | "answers"
-> {
+export interface IPopulatedAll extends Omit<IQuestion, "tags" | "author"> {
   tags: ITag[];
 
   author: Pick<IAuthor, "name" | "image">;
-
-  answers: Pick<IAnswer, "author" | "content" | "upvotes" | "downvotes">[];
 }
 
 export interface IQuestionDoc extends Omit<IQuestion, "_id">, Document {}
@@ -98,12 +90,10 @@ const QuestionSchema = new Schema<IQuestionDoc>(
       default: 0,
     },
 
-    answers: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Answer",
-      },
-    ],
+    answersCount: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true },
 );

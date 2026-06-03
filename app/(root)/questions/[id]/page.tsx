@@ -3,6 +3,7 @@ import { GetQuestionDetails } from "@/lib/actions/GetQuestionDetails.action";
 import IncrementViews from "@/lib/actions/IncrementViews.action";
 import { notFound } from "next/navigation";
 import { after } from "next/server";
+import AnswerForm from "../components/AnswerForm";
 
 async function page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -20,9 +21,14 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
     return notFound();
   }
   return (
-    <div className="container mx-auto px-4 my-15">
-      <QuestionDetails {...question} />
-    </div>
+    <>
+      <div className="container mx-auto px-4 my-15">
+        <QuestionDetails {...question} />
+      </div>
+      <div className="container mx-auto px-4 my-15">
+        <AnswerForm questionId={id} />
+      </div>
+    </>
   );
 }
 

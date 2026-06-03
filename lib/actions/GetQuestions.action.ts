@@ -64,7 +64,10 @@ export async function GetQuestions(params: {
       sortCriteria = { createdAt: -1 };
       break;
     case "unanswered":
-      filterQuery.answers = 0;
+      filterQuery.$or = [
+        { answersCount: { $lte: 0 } },
+        { answersCount: { $exists: false } },
+      ];
       sortCriteria = { createdAt: -1 };
       break;
     case "popular":
@@ -80,7 +83,6 @@ export async function GetQuestions(params: {
     const questions = await Question.find(filterQuery)
       .populate("tags", "name")
       .populate("author", "name image")
-      .populate("answers", "author content upvotes downvotes")
       .lean()
       .sort(sortCriteria)
       .skip(skip)

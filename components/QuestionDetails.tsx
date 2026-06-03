@@ -15,7 +15,7 @@ function QuestionDetails(props: IPopulatedAll) {
     author,
     upvotes,
     downvotes,
-    answers,
+    answersCount,
   } = props;
   return (
     <div className="rounded-xl border border-border p-9 bg-card space-y-5 shadow-2xl">
@@ -60,7 +60,7 @@ function QuestionDetails(props: IPopulatedAll) {
         </div>
         <div className="flex items-center gap-1 hover:text-success transition-colors cursor-pointer">
           <FaRegComment className="text-md" />
-          <span className="text-sm">{answers.length}</span>
+          <span className="text-sm">{answersCount || 0}</span>
         </div>
         {/* <div className="flex items-center gap-1 hover:text-warning transition-colors cursor-pointer">
                       <MdOutlineVisibility className="text-lg" />
