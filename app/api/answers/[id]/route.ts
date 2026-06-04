@@ -1,7 +1,7 @@
 import Answer from "@/database/answer.model";
 import dbConnect from "@/lib/dbConnect";
 import { errorResponse, successResponse } from "@/lib/response";
-import { UpdateAnswerSchema } from "@/lib/schemas/AnswerSchema";
+import { UpdateAnswerSchema } from "@/lib/schemas/CreateAnswerSchema";
 import { Types } from "mongoose";
 
 // Get answer by id

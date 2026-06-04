@@ -4,7 +4,7 @@ import { Markdown } from "tiptap-markdown";
 import { useEditor, EditorContent, useEditorState } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { FaLink, FaListUl, FaListOl, FaCode } from "react-icons/fa";
 import { BulletList, ListItem, OrderedList } from "@tiptap/extension-list";
 import Heading from "@tiptap/extension-heading";
@@ -111,6 +111,19 @@ const Editor = ({
     // Don't render immediately on the server to avoid SSR issues
     immediatelyRender: false,
   });
+
+  // Sync editor content with value prop
+  useEffect(() => {
+    if (
+      editor &&
+      value !==
+        (
+          editor.storage as { markdown?: { getMarkdown: () => string } }
+        ).markdown?.getMarkdown()
+    ) {
+      editor.commands.setContent(value || "");
+    }
+  }, [value, editor]);
 
   const setLink = useCallback(() => {
     const previousUrl = editor?.getAttributes("link").href;

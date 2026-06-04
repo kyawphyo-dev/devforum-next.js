@@ -3,11 +3,13 @@ import { auth } from "@/auth";
 import Question from "@/database/question.model";
 import dbConnect from "@/lib/dbConnect";
 import { errorAction } from "../response";
-import { CreateAnswerSchema } from "../schemas/AnswerSchema";
+import { CreateAnswerSchema } from "../schemas/CreateAnswerSchema";
 import mongoose from "mongoose";
+import { revalidatePath } from "next/cache";
 
 import Answer, { IAnswerDoc } from "@/database/answer.model";
 import { api } from "../api";
+import ROUTES from "@/routes";
 
 export async function CreateAnswer(params: {
   questionId: string;
@@ -17,9 +19,18 @@ export async function CreateAnswer(params: {
   message?: string;
   data?: IAnswerDoc;
 }> {
+  console.log(
+    "CreateAnswer Server Action - RECEIVED PARAMS:",
+    JSON.stringify(params, null, 2),
+  );
+
   // 1. validate data with zod
   const validated = CreateAnswerSchema.safeParse(params);
   if (!validated.success) {
+    console.error(
+      "CreateAnswer Server Action - VALIDATION FAILED:",
+      validated.error.flatten().fieldErrors,
+    );
     return errorAction(validated.error);
   }
 
@@ -75,6 +86,8 @@ export async function CreateAnswer(params: {
 
     // 7. Commit transaction
     await session.commitTransaction();
+
+    revalidatePath(ROUTES.QUESTION_DETAILS(questionId));
 
     // 8. Return serialized answer data
     return {
