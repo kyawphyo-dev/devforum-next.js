@@ -10,6 +10,22 @@ export interface IAnswer {
 
 export interface IAnswerDoc extends IAnswer, Document {}
 
+export interface IAnswerAuthor {
+  name: string;
+  email?: string;
+  image?: string;
+}
+
+export interface IPopulatedAnswer {
+  _id: string;
+  content: string;
+  upvotes: number;
+  downvotes: number;
+  author: IAnswerAuthor;
+  createdAt: string;
+  updatedAt: string;
+}
+
 const AnswerSchema = new Schema(
   {
     author: {

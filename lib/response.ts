@@ -40,7 +40,7 @@ const errorAction = (error: unknown) => {
   let details = null;
 
   if (error instanceof ZodError) {
-    message = error.message;
+    message = error.issues.map((issue) => issue.message).join(", ");
     details = error.flatten().fieldErrors;
   }
 

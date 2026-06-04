@@ -1,9 +1,7 @@
 "use client";
 
 import Editor from "@/components/Editor";
-import { IAnswerDoc } from "@/database/answer.model";
 import { CreateAnswer } from "@/lib/actions/CreateAnswer.action";
-import ROUTES from "@/routes";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
@@ -15,7 +13,9 @@ function AnswerForm({ questionId }: { questionId: string }) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // console.log(content);
+
+    console.log("Submitting answer with:", { questionId, content });
+
     try {
       const { data, success, message } = await CreateAnswer({
         questionId,
@@ -24,22 +24,15 @@ function AnswerForm({ questionId }: { questionId: string }) {
       if (success) {
         toast.success("Answer submitted successfully");
         setContent("");
-        setIsSubmitting(false);
-
-        router.push(ROUTES.QUESTION_DETAILS(questionId));
-
-        return;
+        router.refresh();
       } else {
         toast.error(message || "Failed to submit answer");
-        setIsSubmitting(false);
       }
     } catch (error) {
       toast.error(
         error instanceof Error ? error.message : "An unknown error occurred",
       );
-      setIsSubmitting(false);
     } finally {
-      setContent("");
       setIsSubmitting(false);
     }
   };

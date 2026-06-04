@@ -3,7 +3,7 @@ import Answer from "@/database/answer.model";
 import Question from "@/database/question.model";
 import dbConnect from "@/lib/dbConnect";
 import { errorResponse, successResponse } from "@/lib/response";
-import { CreateAnswerSchema } from "@/lib/schemas/AnswerSchema";
+import { CreateAnswerSchema } from "@/lib/schemas/CreateAnswerSchema";
 
 // Get answers (could be filtered by questionId via query params)
 export async function GET(req: Request) {

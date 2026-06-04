@@ -65,13 +65,16 @@ function Navbar() {
         </div>
         <div>
           {user && (
-            <Image
+            user.image? (<Image
               src={user.image || ""}
               alt="profile globe"
               width={40}
               height={40}
               className="rounded-full object-cover"
-            />
+            />) : (<div className="flex h-10 w-10 rounded-full items-center justify-center bg-secondary text-sm font-medium text-white">
+                {user.name?.charAt(0) ?? "?"}
+              </div>)
+            
           )}
         </div>
       </div>
