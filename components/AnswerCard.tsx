@@ -1,9 +1,8 @@
 import { IPopulatedAnswer } from "@/database/answer.model";
 import { formatDistanceToNow } from "date-fns";
 import Image from "next/image";
-import { AiOutlineLike } from "react-icons/ai";
-import { BiDislike } from "react-icons/bi";
 import Preview from "./MarkDownPreview";
+import VoteButton from "./VoteButton";
 
 function AnswerCard({ answer }: { answer: IPopulatedAnswer }) {
   return (
@@ -42,14 +41,20 @@ function AnswerCard({ answer }: { answer: IPopulatedAnswer }) {
       </div>
 
       <div className="flex items-center gap-4 text-text-muted">
-        <div className="flex cursor-pointer items-center gap-1 transition-colors hover:text-accent">
+        {/* <div className="flex cursor-pointer items-center gap-1 transition-colors hover:text-accent">
           <AiOutlineLike className="text-lg" />
           <span className="text-sm">{answer.upvotes}</span>
         </div>
         <div className="flex cursor-pointer items-center gap-1 transition-colors hover:text-accent">
           <BiDislike className="text-lg" />
           <span className="text-sm">{answer.downvotes}</span>
-        </div>
+        </div> */}
+        <VoteButton
+          targetId={answer._id}
+          targetType="answer"
+          initialDownvotes={answer.downvotes}
+          initialUpvotes={answer.upvotes}
+        />
       </div>
     </li>
   );

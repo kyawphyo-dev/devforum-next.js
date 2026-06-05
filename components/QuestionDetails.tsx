@@ -1,9 +1,8 @@
 import { IPopulatedAll } from "@/database/question.model";
 import { formatDistanceToNow } from "date-fns";
-import { AiOutlineLike } from "react-icons/ai";
-import { BiDislike } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa";
 import Preview from "./MarkDownPreview";
+import VoteButton from "./VoteButton";
 
 function QuestionDetails(props: IPopulatedAll) {
   const {
@@ -50,14 +49,20 @@ function QuestionDetails(props: IPopulatedAll) {
       </div>
 
       <div className="flex items-center gap-4 text-text-muted">
-        <div className="flex items-center gap-1 hover:text-accent transition-colors cursor-pointer">
+        {/* <div className="flex items-center gap-1 hover:text-accent transition-colors cursor-pointer">
           <AiOutlineLike className="text-lg" />
           <span className="text-sm">{upvotes}</span>
         </div>
         <div className="flex items-center gap-1 hover:text-accent transition-colors cursor-pointer">
           <BiDislike className="text-lg" />
           <span className="text-sm">{downvotes}</span>
-        </div>
+        </div> */}
+        <VoteButton
+          targetId={props._id}
+          targetType="question"
+          initialDownvotes={downvotes}
+          initialUpvotes={upvotes}
+        />
         <div className="flex items-center gap-1 hover:text-success transition-colors cursor-pointer">
           <FaRegComment className="text-md" />
           <span className="text-sm">{answersCount || 0}</span>

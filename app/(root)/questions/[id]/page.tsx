@@ -1,11 +1,11 @@
+import AnswersList from "@/components/AnswersList";
 import QuestionDetails from "@/components/QuestionDetails";
+import { GetAnswers } from "@/lib/actions/GetAnswers.action";
 import { GetQuestionDetails } from "@/lib/actions/GetQuestionDetails.action";
 import IncrementViews from "@/lib/actions/IncrementViews.action";
 import { notFound } from "next/navigation";
 import { after } from "next/server";
 import AnswerForm from "../components/AnswerForm";
-import { GetAnswers } from "@/lib/actions/GetAnswers.action";
-import AnswersList from "@/components/AnswersList";
 
 async function page({
   params,
@@ -36,7 +36,7 @@ async function page({
       questionId: id,
     });
   });
- 
+
   return (
     <>
       <div className="container mx-auto px-4 my-15">
@@ -50,7 +50,11 @@ async function page({
         />
       </div>
       <div className="container mx-auto px-4 my-15">
-        <AnswerForm questionId={id} questionContent={question.content} questionTitle={question.title} />
+        <AnswerForm
+          questionId={id}
+          questionContent={question.content}
+          questionTitle={question.title}
+        />
       </div>
     </>
   );
