@@ -50,7 +50,7 @@ async function page({
         />
       </div>
       <div className="container mx-auto px-4 my-15">
-        <AnswerForm questionId={id} />
+        <AnswerForm questionId={id} questionContent={question.content} questionTitle={question.title} />
       </div>
     </>
   );
