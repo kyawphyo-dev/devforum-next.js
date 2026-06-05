@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^3.0.80",
     "@tailwindcss/typography": "^0.5.19",
     "@tiptap/extension-bold": "^3.22.4",
     "@tiptap/extension-code-block-lowlight": "^3.22.5",
@@ -19,6 +20,7 @@
     "@tiptap/pm": "^3.22.4",
     "@tiptap/react": "^3.22.4",
     "@tiptap/starter-kit": "^3.22.4",
+    "ai": "^6.0.197",
     "bcryptjs": "^3.0.3",
     "bright": "^1.0.0",
     "date-fns": "^4.4.0",
