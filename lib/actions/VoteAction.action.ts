@@ -70,7 +70,7 @@ export default async function VoteAction(params: IVoteAction): Promise<{
     let newUserVote: "upvote" | "downvote" | null = null;
     if (existingVote) {
       // If user already voted, handle toggle/change
-      if (existingVote.VoteType === userVote) {
+      if (existingVote.voteType === userVote) {
         // Same vote type clicked - remove the vote
         if (userVote === "upvote") {
           newUpvotes = Math.max(0, newUpvotes - 1);
@@ -97,7 +97,7 @@ export default async function VoteAction(params: IVoteAction): Promise<{
       await Vote.create(
         [
           {
-            author: user._id,
+            userId: user._id,
             targetId,
             targetType,
             voteType: userVote,
