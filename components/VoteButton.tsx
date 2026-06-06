@@ -1,9 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import getUserVote from "@/lib/actions/getUserVote.action";
+import VoteAction from "@/lib/actions/VoteAction.action";
+import { useEffect, useState, useTransition } from "react";
 import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 import { BiDislike, BiSolidDislike } from "react-icons/bi";
+import { toast } from "react-toastify";
 
 interface VoteButtonProps {
   targetId: string;
@@ -20,7 +22,6 @@ function VoteButton({
   initialDownvotes,
   userVote = null,
 }: VoteButtonProps) {
-  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [upvotes, setUpvotes] = useState(initialUpvotes);
   const [downvotes, setDownvotes] = useState(initialDownvotes);
@@ -28,14 +29,27 @@ function VoteButton({
     userVote,
   );
 
+  useEffect(() => {
+    const fetchUserVote = async () => {
+      const { success, data } = await getUserVote({
+        targetId,
+        targetType,
+      });
+      if (success && data) {
+        setActiveVote(data.userVote);
+      }
+    };
+    fetchUserVote();
+  }, [targetId, targetType]);
+
   const handleVote = (voteType: "upvote" | "downvote") => {
     if (isPending) return;
 
-    // const previous = {
-    //   upvotes,
-    //   downvotes,
-    //   activeVote,
-    // };
+    const previous = {
+      upvotes,
+      downvotes,
+      activeVote,
+    };
 
     if (activeVote === voteType) {
       setActiveVote(null);
@@ -56,34 +70,25 @@ function VoteButton({
       else setDownvotes((count) => count + 1);
     }
 
-    // startTransition(async () => {
-    //   try {
-    //     const res = await fetch("/api/votes", {
-    //       method: "POST",
-    //       headers: { "Content-Type": "application/json" },
-    //       body: JSON.stringify({
-    //         ...(targetType === "question"
-    //           ? { questionId: targetId }
-    //           : { answerId: targetId }),
-    //         voteType,
-    //       }),
-    //     });
+    startTransition(async () => {
+      const result = await VoteAction({
+        targetId,
+        targetType,
+        userVote: voteType,
+      });
 
-    //     if (!res.ok) {
-    //       const data = await res.json().catch(() => ({}));
-    //       throw new Error(data.message || "Failed to record vote");
-    //     }
+      if (!result.success || !result.data) {
+        setUpvotes(previous.upvotes);
+        setDownvotes(previous.downvotes);
+        setActiveVote(previous.activeVote);
+        toast.error(result.message || "Failed to record vote");
+        return;
+      }
 
-    //     router.refresh();
-    //   } catch (error) {
-    //     setUpvotes(previous.upvotes);
-    //     setDownvotes(previous.downvotes);
-    //     setActiveVote(previous.activeVote);
-    //     toast.error(
-    //       error instanceof Error ? error.message : "Something went wrong"
-    //     );
-    //   }
-    // });
+      setUpvotes(result.data.upvotes);
+      setDownvotes(result.data.downvotes);
+      setActiveVote(result.data.userVote);
+    });
   };
 
   const upActive = activeVote === "upvote";
