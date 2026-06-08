@@ -19,7 +19,7 @@ export async function GET(
     }
 
     const collection = await Collection.findById(id).populate({
-      path: "question",
+      path: "questionId",
       populate: { path: "tags" },
     });
 
@@ -57,8 +57,8 @@ export async function PUT(
 
     // Ensure the user owns this collection entry before updating
     const collection = await Collection.findOneAndUpdate(
-      { _id: id, user: session.user.id },
-      { question: questionId },
+      { _id: id, userId: session.user.id },
+      { questionId: questionId },
       { new: true },
     );
 
@@ -94,7 +94,7 @@ export async function DELETE(
     // Ensure the user owns this collection entry before deleting
     const collection = await Collection.findOneAndDelete({
       _id: id,
-      user: session.user.id,
+      userId: session.user.id,
     });
 
     if (!collection) {
