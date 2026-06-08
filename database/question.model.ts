@@ -1,4 +1,4 @@
-import { Schema, Document, models, model } from "mongoose";
+import { Document, model, models, Schema } from "mongoose";
 
 interface ITag {
   _id: string;
@@ -44,6 +44,7 @@ export interface IPopulatedAll extends Omit<IQuestion, "tags" | "author"> {
   tags: ITag[];
 
   author: Pick<IAuthor, "name" | "image">;
+  saved?: boolean;
 }
 
 export interface IQuestionDoc extends Omit<IQuestion, "_id">, Document {}

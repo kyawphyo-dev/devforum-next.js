@@ -19,8 +19,8 @@ export async function POST(req: Request) {
     const { questionId } = CollectionSchema.parse(body);
 
     const existingCollection = await Collection.findOne({
-      user: userId,
-      question: questionId,
+      userId,
+      questionId,
     });
 
     if (existingCollection) {
@@ -33,8 +33,8 @@ export async function POST(req: Request) {
     } else {
       // Save
       const collection = await Collection.create({
-        user: userId,
-        question: questionId,
+        userId,
+        questionId,
       });
       return successResponse(
         { saved: true, collection, message: "Added to collection" },
@@ -59,8 +59,8 @@ export async function GET(req: Request) {
       throw new Error("User ID is required");
     }
 
-    const collections = await Collection.find({ user: userId }).populate({
-      path: "question",
+    const collections = await Collection.find({ userId }).populate({
+      path: "questionId",
       populate: { path: "tags" },
     });
 

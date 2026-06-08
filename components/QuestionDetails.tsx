@@ -1,6 +1,7 @@
 import { IPopulatedAll } from "@/database/question.model";
 import { formatDistanceToNow } from "date-fns";
 import { FaRegComment } from "react-icons/fa";
+import BookMarkCard from "./BookMarkCard";
 import Preview from "./MarkDownPreview";
 import VoteButton from "./VoteButton";
 
@@ -18,7 +19,14 @@ function QuestionDetails(props: IPopulatedAll) {
   } = props;
   return (
     <div className="rounded-xl border border-border p-9 bg-card space-y-5 shadow-2xl">
-      <h1 className="text-2xl font-bold">{title}</h1>
+      <div className="flex justify-between">
+        <h1 className="text-2xl font-bold">{title}</h1>
+        <BookMarkCard
+          key={props._id}
+          questionId={props._id}
+          saved={props.saved}
+        />
+      </div>
 
       <div className="flex items-center gap-4 text-sm text-muted-foreground">
         <span>Asked by {author.name}</span>

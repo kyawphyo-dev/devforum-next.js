@@ -1,8 +1,11 @@
 "use server";
-import Question, { IPopulatedAll, IQuestion } from "@/database/question.model";
-import dbConnect from "@/lib/dbConnect";
-import { errorAction } from "../response";
+import { auth } from "@/auth";
+import Collection from "@/database/collection.model";
+import Question, { IPopulatedAll } from "@/database/question.model";
 import "@/database/tag.model";
+import dbConnect from "@/lib/dbConnect";
+import { api } from "../api";
+import { errorAction } from "../response";
 import { GetQuestionSchema } from "../schemas/GetQuestionSchema";
 
 export async function GetQuestionDetails(params: {
@@ -32,10 +35,29 @@ export async function GetQuestionDetails(params: {
       throw new Error("Question not found");
     }
 
+    // Auth
+    const auth_session = await auth();
+    let saved = false;
+
+    if (auth_session?.user?.id) {
+      const userEmail = auth_session.user.email || "";
+      const response = await api.users.getByEmail(userEmail);
+
+      if (response && response.data) {
+        const user = response.data;
+        // Get Collection
+        const collection = await Collection.findOne({
+          questionId,
+          userId: user._id,
+        }).lean();
+        saved = !!collection;
+      }
+    }
+
     // 4. Return serialized question data
     return {
       success: true,
-      data: JSON.parse(JSON.stringify(question)) as IPopulatedAll,
+      data: { ...JSON.parse(JSON.stringify(question)), saved },
     };
   } catch (error) {
     if (error instanceof Error && error.message === "NEXT_REDIRECT")
