@@ -1,21 +1,24 @@
 export const HomePageFilters = [
   { name: "Newest", value: "newest" },
+  { name: "Oldest", value: "oldest" },
   { name: "Popular", value: "popular" },
+  { name: "Most Voted", value: "mostvoted" },
+  { name: "Most Answered", value: "mostanswered" },
   { name: "Unanswered", value: "unanswered" },
-  { name: "Recommended", value: "recommended" },
+  //   { name: "Recommended", value: "recommended" },
 ];
 
 export const AnswerFilters = [
-  { name: "Newest", value: "latest" },
+  { name: "Newest", value: "newest" },
   { name: "Oldest", value: "oldest" },
   { name: "Popular", value: "popular" },
 ];
 
 export const CollectionFilters = [
+  { name: "Newest", value: "newest" },
   { name: "Oldest", value: "oldest" },
   { name: "Most Voted", value: "mostvoted" },
   { name: "Most Viewed", value: "mostviewed" },
-  { name: "Most Recent", value: "mostrecent" },
   { name: "Most Answered", value: "mostanswered" },
 ];
 
@@ -35,8 +38,8 @@ export const UserFilters = [
 // Default filter values for each filter set
 export const DefaultFilters = {
   HomePageFilters: "newest",
-  CollectionFilters: "mostrecent",
+  CollectionFilters: "newest",
   TagFilters: "name",
   UserFilters: "newest",
-  AnswerFilters: "latest",
+  AnswerFilters: "newest",
 } as const;

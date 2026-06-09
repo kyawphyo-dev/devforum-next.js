@@ -30,7 +30,10 @@ export async function GetBookMarkQuestions(params: {
   // Auth validation
   const auth_session = await auth();
   if (!auth_session?.user?.id) {
-    throw new Error("Unauthorized");
+    return {
+      success: true,
+      data: { collections: [], questions: [], isNext: false },
+    };
   }
   const userEmail = auth_session.user.email || "";
   const response = await api.users.getByEmail(userEmail);
@@ -78,7 +81,7 @@ export async function GetBookMarkQuestions(params: {
   let sortCriteria: Record<string, SortOrder>;
 
   switch (filter) {
-    case "recent":
+    case "newest":
       sortCriteria = { createdAt: -1 };
       break;
     case "oldest":
@@ -86,6 +89,9 @@ export async function GetBookMarkQuestions(params: {
       break;
     case "mostvoted":
       sortCriteria = { upvotes: -1 };
+      break;
+    case "mostviewed":
+      sortCriteria = { views: -1 };
       break;
     case "mostanswered":
       sortCriteria = { answers: -1 };
