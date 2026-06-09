@@ -14,6 +14,7 @@ export async function GetQuestions(params: {
   filter?: string;
 }): Promise<{
   data?: {
+    totalQuestions: number;
     questions: IQuestionDoc[];
     isNext?: boolean;
   };
@@ -63,6 +64,15 @@ export async function GetQuestions(params: {
     case "newest":
       sortCriteria = { createdAt: -1 };
       break;
+    case "oldest":
+      sortCriteria = { createdAt: 1 };
+      break;
+    case "mostvoted":
+      sortCriteria = { votes: -1 };
+      break;
+    case "mostanswered":
+      sortCriteria = { answersCount: -1 };
+      break;
     case "unanswered":
       filterQuery.$or = [
         { answersCount: { $lte: 0 } },
@@ -71,7 +81,7 @@ export async function GetQuestions(params: {
       sortCriteria = { createdAt: -1 };
       break;
     case "popular":
-      sortCriteria = { upvotes: -1 };
+      sortCriteria = { views: -1 };
       break;
     default:
       sortCriteria = { createdAt: -1 };
@@ -93,6 +103,7 @@ export async function GetQuestions(params: {
     return {
       success: true,
       data: {
+        totalQuestions,
         questions,
         isNext,
       },

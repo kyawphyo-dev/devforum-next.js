@@ -2,6 +2,8 @@ import { IPopulatedAnswer } from "@/database/answer.model";
 import { Suspense } from "react";
 import AnswerCard from "./AnswerCard";
 import SeeMoreAnswersButton from "./SeeMoreAnswersButton";
+import PillFilter from "./PillFilter";
+import { AnswerFilters, DefaultFilters } from "@/constant/filter";
 
 const INITIAL_VISIBLE = 3;
 
@@ -18,7 +20,13 @@ function AnswersList({ answers, totalAnswers, showAll }: AnswersListProps) {
 
   return (
     <section className="space-y-6">
-      <h2 className="text-2xl font-bold text-main-text">{countLabel}</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-bold text-main-text">{countLabel}</h2>
+        {/* <PillFilter
+          filters={AnswerFilters}
+          defaultFilter={DefaultFilters.AnswerFilters}
+        /> */}
+      </div>
 
       {answers.length === 0 ? (
         <div className="rounded-xl border border-dashed border-border bg-card/50 p-12 text-center">

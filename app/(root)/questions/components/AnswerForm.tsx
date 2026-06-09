@@ -1,35 +1,39 @@
-"use client"
+"use client";
 
 import Editor from "@/components/Editor";
 import { CreateAnswer } from "@/lib/actions/CreateAnswer.action";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { google } from "@ai-sdk/google";
-import { generateText, MessageConversionError } from "ai";
 import GenerateAiAnswer from "@/lib/actions/GenerateAiAnswer.action";
 
-
-function AnswerForm({ questionId,questionContent,questionTitle }: { questionId: string,questionContent: string,questionTitle: string }) {
+function AnswerForm({
+  questionId,
+  questionContent,
+  questionTitle,
+}: {
+  questionId: string;
+  questionContent: string;
+  questionTitle: string;
+}) {
   const router = useRouter();
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleGenerateAnswer = async () => {
-    setIsLoading(true)
-   const {data, success, message} = await GenerateAiAnswer({
+    setIsLoading(true);
+    const { data, success, message } = await GenerateAiAnswer({
       questionContent,
       questionTitle,
       answerContent: content,
-    })
-    if(data && success ){
-      console.log (success,message)
-    }else{
-      console.log(success,message)
+    });
+    if (data && success) {
+      console.log(success, message);
+    } else {
+      console.log(success, message);
     }
-      setIsLoading(false);
-
+    setIsLoading(false);
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -74,14 +78,16 @@ function AnswerForm({ questionId,questionContent,questionTitle }: { questionId: 
 
       <div className="flex justify-end gap-3">
         {/* generate answer button */}
-      {content.length >= 10 && <button
-          type="button"
-          disabled={isSubmitting && isLoading}
-          onClick={handleGenerateAnswer}
-          className="border-2 border-accent hover:bg-accent text-white font-bold py-4 px-6 rounded-lg transition-all duration-200 transform hover:scale-[1.01] active:scale-[0.99] shadow-lg mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isLoading ? "Generating..." : "Generate Ai Answer"}
-        </button>}
+        {content.length >= 10 && (
+          <button
+            type="button"
+            disabled={isSubmitting && isLoading}
+            onClick={handleGenerateAnswer}
+            className="border-2 border-accent hover:bg-accent text-white font-bold py-4 px-6 rounded-lg transition-all duration-200 transform hover:scale-[1.01] active:scale-[0.99] shadow-lg mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isLoading ? "Generating..." : "Generate Ai Answer"}
+          </button>
+        )}
 
         {/* submit button */}
         <button
