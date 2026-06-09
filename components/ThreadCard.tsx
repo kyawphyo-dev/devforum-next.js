@@ -5,6 +5,7 @@ import { AiOutlineLike } from "react-icons/ai";
 import { MdOutlineVisibility } from "react-icons/md";
 import { IPopulatedAll } from "@/database/question.model";
 import { BiDislike } from "react-icons/bi";
+import { FaBookmark } from "react-icons/fa";
 
 import ROUTES from "@/routes";
 
@@ -28,10 +29,15 @@ function ThreadCard(question: IPopulatedAll) {
     <div className="bg-primary/20 border border-border rounded-xl p-6 hover:border-secondary transition-all my-3">
       <Link href={ROUTES.QUESTION_DETAILS(question._id)}>
         <div className="flex flex-col gap-4">
-          {/* Title */}
-          <h3 className="text-xl font-bold text-main-text hover:text-accent transition-colors">
-            {question.title}
-          </h3>
+          {/* Title and Bookmark */}
+          <div className="flex justify-between items-start gap-4">
+            <h3 className="text-xl font-bold text-main-text hover:text-accent transition-colors flex-1">
+              {question.title}
+            </h3>
+            {question.saved && (
+              <FaBookmark className="text-secondary shrink-0" size={18} />
+            )}
+          </div>
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2">
