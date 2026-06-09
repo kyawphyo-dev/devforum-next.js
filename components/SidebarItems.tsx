@@ -8,6 +8,7 @@ import { FaChartLine } from "react-icons/fa";
 import { MdOutlineCategory } from "react-icons/md";
 import { BiCategory } from "react-icons/bi";
 import ROUTES from "@/routes";
+import { BsBookmarks } from "react-icons/bs";
 
 const sidebarItems = [
   {
@@ -19,6 +20,11 @@ const sidebarItems = [
     label: "Tags",
     href: ROUTES.TAGS,
     icon: IoMdPricetags,
+  },
+  {
+    label: "Bookmarks",
+    href: ROUTES.BOOKMARKS,
+    icon: BsBookmarks,
   },
   {
     label: "Popular",
