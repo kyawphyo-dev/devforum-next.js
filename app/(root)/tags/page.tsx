@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import DataRenderer from "@/components/DataRenderer";
+import Pagination from "@/components/Pagination";
 import PillFilter from "@/components/PillFilter";
 import TagCard from "@/components/TagCard";
 import { DefaultFilters, TagFilters } from "@/constant/filter";
@@ -29,7 +30,7 @@ async function page({
   }>;
 }) {
   const session = await auth();
-  const { page, pageSize, search, filter } = await searchParams;
+  const { page = 1, pageSize = 12, search, filter } = await searchParams;
   const title = getPageTitle(filter);
 
   const { success, data, message } = await GetTags({
@@ -39,7 +40,8 @@ async function page({
     filter: filter || "",
   });
 
-  const { tags = [] } = data || {};
+  const { tags = [], totalPages = 0, currentPage = 0 } = data || {};
+
   console.log(tags, success);
 
   return (
@@ -67,6 +69,7 @@ async function page({
           );
         }}
       />
+      <Pagination currentPage={currentPage} totalPages={totalPages} />
     </>
   );
 }

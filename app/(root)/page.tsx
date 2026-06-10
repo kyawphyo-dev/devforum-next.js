@@ -1,5 +1,6 @@
 import ButtonLink from "@/components/ButtonLink";
 import DataRenderer from "@/components/DataRenderer";
+import Pagination from "@/components/Pagination";
 import PillFilter from "@/components/PillFilter";
 import ThreadCard from "@/components/ThreadCard";
 import { DefaultFilters, HomePageFilters } from "@/constant/filter";
@@ -49,6 +50,8 @@ async function page({
   // }
   const questions = data?.questions || [];
   const totalQuestions = data?.totalQuestions || 0;
+  const currentPage = data?.currentPage || 1;
+  const totalPages = data?.totalPages || 1;
   // isNext is reserved for future pagination implementation
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isNext = data?.isNext || false;
@@ -81,6 +84,7 @@ async function page({
           ))
         }
       />
+      <Pagination currentPage={currentPage} totalPages={totalPages} />
     </div>
   );
 }

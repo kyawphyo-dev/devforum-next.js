@@ -20,6 +20,8 @@ const GetBookMarkQuestions = async (params: {
   data?: {
     questions: IPopulatedAll[];
     isNext: boolean;
+    totalPages: number;
+    currentPage: number;
   };
   success: boolean;
   message?: string;
@@ -36,7 +38,7 @@ const GetBookMarkQuestions = async (params: {
   if (!user.id) {
     return {
       success: true,
-      data: { questions: [], isNext: false },
+      data: { questions: [], isNext: false, totalPages: 0, currentPage: 0 },
     };
   }
 
@@ -142,12 +144,15 @@ const GetBookMarkQuestions = async (params: {
 
     const questions = JSON.parse(JSON.stringify(results));
     const isNext = totalCollections > skip + questions.length;
+    const totalPages = Math.ceil(totalCollections / pageSize);
 
     return {
       success: true,
       data: {
         questions,
         isNext,
+        totalPages,
+        currentPage: Number(page),
       },
     };
   } catch (e) {

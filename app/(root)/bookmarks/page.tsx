@@ -1,4 +1,5 @@
 import DataRenderer from "@/components/DataRenderer";
+import Pagination from "@/components/Pagination";
 import PillFilter from "@/components/PillFilter";
 import ThreadCard from "@/components/ThreadCard";
 import { CollectionFilters, DefaultFilters } from "@/constant/filter";
@@ -31,7 +32,7 @@ async function page({
     filter?: string;
   }>;
 }) {
-  const { page, pageSize, search, filter } = await searchParams;
+  const { page = 1, pageSize = 10, search, filter } = await searchParams;
   const title = getPageTitle(filter);
   const { data, success, message } = await GetBookMarkQuestions({
     page: Number(page) || 1,
@@ -40,7 +41,7 @@ async function page({
     filter,
   });
 
-  const questions = data?.questions || [];
+  const { questions = [], totalPages = 0, currentPage = 0 } = data || {};
   return (
     <div className="p-5 flex flex-col gap-6">
       <div className="flex justify-between items-center">
@@ -63,6 +64,7 @@ async function page({
           ))
         }
       />
+      <Pagination totalPages={totalPages} currentPage={currentPage} />
     </div>
   );
 }
