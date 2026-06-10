@@ -15,6 +15,8 @@ export async function GetTags(params: {
   data?: {
     tags: ITagDoc[];
     isNext?: boolean;
+    totalPages?: number;
+    currentPage?: number;
   };
   success: boolean;
   message?: string;
@@ -29,7 +31,7 @@ export async function GetTags(params: {
     return errorAction(validated.error);
   }
 
-  const { page = 1, pageSize = 10, search, filter } = validated.data;
+  const { page = 1, pageSize = 12, search, filter } = validated.data;
 
   const skip = Number((page - 1) * pageSize); // skip documents
   const limit = Number(pageSize);
@@ -75,12 +77,15 @@ export async function GetTags(params: {
       .limit(limit);
 
     const isNext = totalTags > skip + tags.length;
+    const totalPages = Math.ceil(totalTags / pageSize);
 
     return {
       success: true,
       data: {
         tags,
         isNext,
+        totalPages,
+        currentPage: Number(page),
       },
     };
   } catch (e) {

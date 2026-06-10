@@ -6,6 +6,8 @@ import IncrementViews from "@/lib/actions/IncrementViews.action";
 import { notFound } from "next/navigation";
 import { after } from "next/server";
 import AnswerForm from "../components/AnswerForm";
+import ButtonLink from "@/components/ButtonLink";
+import ROUTES from "@/routes";
 
 async function page({
   params,
@@ -39,7 +41,11 @@ async function page({
 
   return (
     <>
-      <div className="container mx-auto px-4 my-15">
+      <div className="w-1/3 flex justify-between my-15">
+        <div></div>
+        <ButtonLink href={ROUTES.QUESTIONS}>Create Thread</ButtonLink>
+      </div>
+      <div className="container mx-auto px-4 ">
         <QuestionDetails {...question} />
       </div>
       <div className="container mx-auto px-4 my-15">
