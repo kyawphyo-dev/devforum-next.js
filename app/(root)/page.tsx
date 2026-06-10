@@ -30,7 +30,12 @@ async function page({
     filter?: string;
   };
 }) {
-  const { page, pageSize, search, filter } = await searchParams;
+  const {
+    page = 1,
+    pageSize = 10,
+    search = "",
+    filter = "",
+  } = await searchParams;
 
   const title = getPageTitle(filter);
   const { data, success, message } = await GetQuestions({
