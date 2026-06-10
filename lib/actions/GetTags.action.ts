@@ -52,17 +52,17 @@ export async function GetTags(params: {
     case "popular":
       sortCriteria = { questions: -1 };
       break;
-    case "recent":
+    case "newest":
       sortCriteria = { createdAt: -1 };
       break;
     case "oldest":
       sortCriteria = { createdAt: 1 };
       break;
     case "name":
-      sortCriteria = { name: 1 };
+      sortCriteria = { name: -1 };
       break;
     default:
-      sortCriteria = { questions: -1 };
+      sortCriteria = { name: 1 };
       break;
   }
 

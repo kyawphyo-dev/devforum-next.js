@@ -23,8 +23,8 @@ export const CollectionFilters = [
 ];
 
 export const TagFilters = [
-  { name: "A-Z", value: "name" },
-  { name: "Recent", value: "recent" },
+  { name: "A-Z", value: "namedsc" },
+  { name: "Newest", value: "newest" },
   { name: "Oldest", value: "oldest" },
   { name: "Popular", value: "popular" },
 ];
@@ -39,7 +39,7 @@ export const UserFilters = [
 export const DefaultFilters = {
   HomePageFilters: "newest",
   CollectionFilters: "newest",
-  TagFilters: "name",
+  TagFilters: "namedsc",
   UserFilters: "newest",
   AnswerFilters: "newest",
 } as const;

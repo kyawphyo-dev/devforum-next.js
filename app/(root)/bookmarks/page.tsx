@@ -2,7 +2,7 @@ import DataRenderer from "@/components/DataRenderer";
 import PillFilter from "@/components/PillFilter";
 import ThreadCard from "@/components/ThreadCard";
 import { CollectionFilters, DefaultFilters } from "@/constant/filter";
-import { GetBookMarkQuestions } from "@/lib/actions/GetBookMarkQuestions.action";
+import GetBookMarkQuestions from "@/lib/actions/GetBookMarkQuestions.action";
 
 const getPageTitle = (filter?: string) => {
   switch (filter) {

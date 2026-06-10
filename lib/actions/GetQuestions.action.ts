@@ -17,6 +17,8 @@ export async function GetQuestions(params: {
     totalQuestions: number;
     questions: IQuestionDoc[];
     isNext?: boolean;
+    currentPage?: number;
+    totalPages?: number;
   };
   success: boolean;
   message?: string;
@@ -39,7 +41,16 @@ export async function GetQuestions(params: {
 
   //implement later on
   if (filter === "recommended") {
-    return { success: true, data: { questions: [], isNext: false } };
+    return {
+      success: true,
+      data: {
+        questions: [],
+        isNext: false,
+        currentPage: page,
+        totalPages: 0,
+        totalQuestions: 0,
+      },
+    };
   }
 
   if (search) {
@@ -99,13 +110,15 @@ export async function GetQuestions(params: {
       .limit(limit);
 
     const isNext = totalQuestions > skip + questions.length;
-
+    const totalPages = Math.ceil(totalQuestions / pageSize);
     return {
       success: true,
       data: {
         totalQuestions,
         questions,
         isNext,
+        currentPage: page,
+        totalPages,
       },
     };
   } catch (e) {

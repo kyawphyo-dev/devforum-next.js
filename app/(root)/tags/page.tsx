@@ -1,8 +1,25 @@
 import { auth } from "@/auth";
 import DataRenderer from "@/components/DataRenderer";
+import PillFilter from "@/components/PillFilter";
 import TagCard from "@/components/TagCard";
+import { DefaultFilters, TagFilters } from "@/constant/filter";
 import { ITagDoc } from "@/database/tag.model";
 import { GetTags } from "@/lib/actions/GetTags.action";
+
+const getPageTitle = (filter?: string) => {
+  switch (filter) {
+    case "namedsc":
+      return "A-Z Tags";
+    case "newest":
+      return "Newest Tags";
+    case "oldest":
+      return "Oldest Tags";
+    case "popular":
+      return "Popular Tags";
+    default:
+      return "All Tags";
+  }
+};
 
 async function page({
   searchParams,
@@ -13,6 +30,7 @@ async function page({
 }) {
   const session = await auth();
   const { page, pageSize, search, filter } = await searchParams;
+  const title = getPageTitle(filter);
 
   const { success, data, message } = await GetTags({
     page: Number(page) || 1,
@@ -27,8 +45,12 @@ async function page({
   return (
     <>
       <div className="flex items-center justify-between p-5">
-        <div>
-          <h1 className="text-3xl font-bold">All Tags</h1>
+        <div className="flex items-center justify-between w-full">
+          <h1 className="text-3xl font-bold">{title}</h1>
+          <PillFilter
+            filters={TagFilters}
+            defaultFilter={DefaultFilters.TagFilters}
+          />
         </div>
       </div>
       <DataRenderer<ITagDoc>
