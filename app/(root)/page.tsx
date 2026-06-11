@@ -60,7 +60,7 @@ async function page({
       <div className="flex justify-between items-center">
         <h3 className="text-2xl font-bold">{title}</h3>
         <div className="w-1/3">
-          <ButtonLink href={ROUTES.QUESTIONS}>Create Thread</ButtonLink>
+          <ButtonLink href={ROUTES.QUESTIONS}>Ask a Question</ButtonLink>
         </div>
       </div>
       {/* <Filter /> */}
