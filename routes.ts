@@ -2,6 +2,7 @@ const ROUTES = {
   HOME: "/",
   LOGIN: "/login",
   TAGS: "/tags",
+  PROFILE: (id: string) => `/profile/${id}`,
   REGISTER: "/register",
   DASHBOARD: "/dashboard",
   CATEGORIES: "/categories",

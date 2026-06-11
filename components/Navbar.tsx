@@ -63,20 +63,22 @@ function Navbar() {
             <SearchInput />
           </Suspense>
         </div>
-        <div>
-          {user && (
-            user.image? (<Image
-              src={user.image || ""}
-              alt="profile globe"
-              width={40}
-              height={40}
-              className="rounded-full object-cover"
-            />) : (<div className="flex h-10 w-10 rounded-full items-center justify-center bg-secondary text-sm font-medium text-white">
+        <Link href={ROUTES.PROFILE(user?.id || "")}>
+          {user &&
+            (user.image ? (
+              <Image
+                src={user.image || ""}
+                alt="profile globe"
+                width={40}
+                height={40}
+                className="rounded-full object-cover"
+              />
+            ) : (
+              <div className="flex h-10 w-10 rounded-full items-center justify-center bg-secondary text-sm font-medium text-white">
                 {user.name?.charAt(0) ?? "?"}
-              </div>)
-            
-          )}
-        </div>
+              </div>
+            ))}
+        </Link>
       </div>
     </nav>
   );
