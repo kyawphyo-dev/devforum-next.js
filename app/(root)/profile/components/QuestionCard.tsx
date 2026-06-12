@@ -1,27 +1,28 @@
 import Link from "next/link";
+import { format } from "date-fns";
+import { QuestionLean } from "@/database/question.model";
+import ROUTES from "@/routes";
+import { CiSquareQuestion } from "react-icons/ci";
+import { RiCharacterRecognitionFill } from "react-icons/ri";
 
-interface ProfileQuestionCardProps {
-  _id: string;
-  title: string;
-  answers: number;
-  votes: number;
-  createdAt: string;
-}
-
-function ProfileQuestionCard() {
+function QuestionCard({ question }: { question: QuestionLean }) {
   return (
-    <Link href="" className="block border-b border-border py-4">
-      <h3 className="text-base font-semibold hover:text-primary-600 transition-colors">
-        title
+    <Link
+      href={ROUTES.QUESTION_DETAILS(question._id.toString())}
+      className="block border-b border-border py-4 hover:text-blue-600 transition-all"
+    >
+      <h3 className=" flex items-center font-semibold hover:text-primary-600 transition-colors">
+        <CiSquareQuestion className="me-2 text-secondary font-bold" size={18} />
+        {question.title}
       </h3>
 
       <div className="mt-2 flex gap-4 text-sm text-light-500">
-        <span> votes.</span>
-        <span> answers.</span>
-        <span> createdAt</span>
+        <span> {question.upvotes || 0} votes.</span>
+        <span> {question.answersCount || 0} answers.</span>
+        <span> {format(new Date(question.createdAt), "dd MMM yyyy")}</span>
       </div>
     </Link>
   );
 }
 
-export default ProfileQuestionCard;
+export default QuestionCard;

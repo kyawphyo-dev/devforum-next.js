@@ -20,7 +20,7 @@ const GetUser = async ({
   details?: object | null;
 }> => {
   await dbConnect();
-  const validated = await GetUserSchema.safeParse({ UserId });
+  const validated = GetUserSchema.safeParse({ UserId });
   if (!validated.success) {
     return errorAction(validated.error);
   }
@@ -32,11 +32,11 @@ const GetUser = async ({
       Question.countDocuments({ author: UserId }),
       Answer.countDocuments({ author: UserId }),
     ]);
-    console.log("GetUser", user, totalAnswers, totalQuestions);
+
     return {
       success: true,
       data: {
-        user,
+        user: JSON.parse(JSON.stringify(user)),
         totalQuestions,
         totalAnswers,
       },

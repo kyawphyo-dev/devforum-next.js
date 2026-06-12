@@ -3,6 +3,7 @@ const ROUTES = {
   LOGIN: "/login",
   TAGS: "/tags",
   PROFILE: (id: string) => `/profile/${id}`,
+  PROFILE_EDIT: (id: string) => `/profile/${id}/edit`,
   REGISTER: "/register",
   DASHBOARD: "/dashboard",
   CATEGORIES: "/categories",

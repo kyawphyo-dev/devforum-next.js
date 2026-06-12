@@ -2,7 +2,7 @@ import Question, { IQuestionDoc } from "@/database/question.model";
 import dbConnect from "../dbConnect";
 import { errorAction } from "../response";
 
-const GetTopQuestions = async (): Promise<{
+const GetTopQuestion = async (): Promise<{
   success: boolean;
   data?: {
     topQuestions: IQuestionDoc[];
@@ -25,4 +25,4 @@ const GetTopQuestions = async (): Promise<{
   }
 };
 
-export default GetTopQuestions;
+export default GetTopQuestion;

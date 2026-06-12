@@ -1,5 +1,21 @@
 import { Document, model, models, Schema } from "mongoose";
 
+import { Types } from "mongoose";
+
+export type QuestionLean = {
+  _id: Types.ObjectId | string;
+  title: string;
+  content: string;
+  tags: ITag[];
+  author: IAuthor[];
+  answers: IAnswer[];
+  createdAt: string;
+  updatedAt: string;
+  upvotes?: number;
+  downvotes?: number;
+  answersCount?: number;
+  views?: number;
+};
 interface ITag {
   _id: string;
   name: string;
@@ -14,6 +30,7 @@ export interface IAnswer {
 }
 
 export interface IAuthor {
+  _id: string;
   name: string;
   image?: string;
 }
@@ -43,7 +60,8 @@ export interface IAuthorPopulated extends Omit<IQuestion, "author"> {
 export interface IPopulatedAll extends Omit<IQuestion, "tags" | "author"> {
   tags: ITag[];
 
-  author: Pick<IAuthor, "name" | "image">;
+  author: Pick<IAuthor, "_id" | "name" | "image">;
+
   saved?: boolean;
 }
 

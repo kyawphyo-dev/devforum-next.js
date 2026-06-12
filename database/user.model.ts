@@ -13,6 +13,8 @@ export interface IUser {
   location?: string;
   portfolio?: string;
   reputation?: number;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface IUserDoc extends IUser, Document {}

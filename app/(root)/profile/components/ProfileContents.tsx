@@ -1,0 +1,47 @@
+"use client";
+import { useState } from "react";
+import TopQuestions from "./TopQuestions";
+import { QuestionLean } from "@/database/question.model";
+import AnswerCard from "./AnswersCard";
+import { IAnswerLean } from "@/database/answer.model";
+
+function ProfileContents({
+  topQuestions,
+  topAnswers,
+}: {
+  topQuestions: QuestionLean[];
+  topAnswers: IAnswerLean[];
+}) {
+  const [type, setType] = useState("questions");
+  const clickhandle = ({ type }: { type: "questions" | "answers" }) => {
+    setType(type);
+  };
+  return (
+    <div className="mt-5">
+      <h2 className="text-xl font-bold">
+        Top {type === "questions" ? "Questions" : "Answers"}
+      </h2>
+      <div className="space-x-3 text-xs mt-5 ">
+        <button
+          onClick={() => clickhandle({ type: "questions" })}
+          className={`px-2 py-1 rounded-sm border-border border hover:bg-active transition-all ${type === "questions" ? "bg-active" : ""}`}
+        >
+          Questions
+        </button>
+        <button
+          onClick={() => clickhandle({ type: "answers" })}
+          className={`px-2 py-1 rounded-sm border-border border hover:bg-active transition-all ${type === "answers" ? "bg-active" : ""}`}
+        >
+          Answers
+        </button>
+      </div>
+      {type === "questions" && <TopQuestions topQuestions={topQuestions} />}
+      {type === "answers" &&
+        topAnswers.map((answer) => (
+          <AnswerCard key={answer._id.toString()} answer={answer} />
+        ))}
+    </div>
+  );
+}
+
+export default ProfileContents;
