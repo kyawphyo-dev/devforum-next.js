@@ -3,13 +3,18 @@ import { formatDistanceToNow } from "date-fns";
 import Image from "next/image";
 import Preview from "./MarkDownPreview";
 import VoteButton from "./VoteButton";
+import ROUTES from "@/routes";
+import Link from "next/link";
 
 function AnswerCard({ answer }: { answer: IPopulatedAnswer }) {
   return (
     <li className="rounded-xl border border-border bg-card space-y-5 p-9 shadow-2xl">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-border">
+          <Link
+            href={ROUTES.PROFILE(answer.author._id)}
+            className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-border"
+          >
             {answer.author?.image ? (
               <Image
                 src={answer.author.image}
@@ -22,7 +27,7 @@ function AnswerCard({ answer }: { answer: IPopulatedAnswer }) {
                 {answer.author?.name?.charAt(0) ?? "?"}
               </div>
             )}
-          </div>
+          </Link>
           <div className="flex flex-col">
             <span className="font-medium text-main-text">
               {answer.author?.name ?? "Anonymous"}

@@ -1,5 +1,16 @@
 import { Schema, Document, models, model } from "mongoose";
 
+export interface IAnswerLean {
+  _id: string;
+  author: string;
+  question: string;
+  content: string;
+  upvotes: number;
+  downvotes: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface IAnswer {
   author: Schema.Types.ObjectId;
   question: Schema.Types.ObjectId;
@@ -11,6 +22,7 @@ export interface IAnswer {
 export interface IAnswerDoc extends IAnswer, Document {}
 
 export interface IAnswerAuthor {
+  _id: string;
   name: string;
   email?: string;
   image?: string;

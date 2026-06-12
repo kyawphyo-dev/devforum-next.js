@@ -6,7 +6,7 @@ import { FaChevronRight } from "react-icons/fa";
 function TopQuestionCard({ topQuestions }: { topQuestions: IQuestionDoc[] }) {
   return (
     <div className="flex flex-col gap-4">
-      {topQuestions?.map((question, i) => (
+      {topQuestions?.map((question) => (
         <Link
           key={question._id.toString()}
           href={ROUTES.QUESTION_DETAILS(question._id.toString())}
