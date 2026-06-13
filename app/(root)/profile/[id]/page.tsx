@@ -45,7 +45,11 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
           />
         </div>
       </div>
-      <ProfileContents topQuestions={topQuestions} topAnswers={topAnswers} />
+      <ProfileContents
+        userId={id}
+        topQuestions={topQuestions}
+        topAnswers={topAnswers}
+      />
     </div>
   );
 }

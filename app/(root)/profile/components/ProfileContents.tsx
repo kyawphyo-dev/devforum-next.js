@@ -4,11 +4,15 @@ import TopQuestions from "./TopQuestions";
 import { QuestionLean } from "@/database/question.model";
 import AnswerCard from "./AnswersCard";
 import { IAnswerLean } from "@/database/answer.model";
+import Link from "next/link";
+import ROUTES from "@/routes";
 
 function ProfileContents({
+  userId,
   topQuestions,
   topAnswers,
 }: {
+  userId: string;
   topQuestions: QuestionLean[];
   topAnswers: IAnswerLean[];
 }) {
@@ -21,7 +25,8 @@ function ProfileContents({
       <h2 className="text-xl font-bold">
         Top {type === "questions" ? "Questions" : "Answers"}
       </h2>
-      <div className="space-x-3 text-xs mt-5 ">
+
+      <div className="space-x-3 text-xs mt-5 flex items-center ">
         <button
           onClick={() => clickhandle({ type: "questions" })}
           className={`px-2 py-1 rounded-sm border-border border hover:bg-active transition-all ${type === "questions" ? "bg-active" : ""}`}
@@ -34,6 +39,22 @@ function ProfileContents({
         >
           Answers
         </button>
+        <p>
+          View all{" "}
+          <Link
+            className="text-blue-600 underline"
+            href={ROUTES.PROFILE_ALLQUESTIONS(userId)}
+          >
+            questions
+          </Link>{" "}
+          or{" "}
+          <Link
+            className="text-blue-600 underline"
+            href={ROUTES.PROFILE_ALLANSWERS(userId)}
+          >
+            answers
+          </Link>
+        </p>
       </div>
       {type === "questions" && <TopQuestions topQuestions={topQuestions} />}
       {type === "answers" &&

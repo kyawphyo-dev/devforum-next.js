@@ -4,6 +4,8 @@ const ROUTES = {
   TAGS: "/tags",
   PROFILE: (id: string) => `/profile/${id}`,
   PROFILE_EDIT: (id: string) => `/profile/${id}/edit`,
+  PROFILE_ALLQUESTIONS: (id: string) => `/profile/${id}/allquestions`,
+  PROFILE_ALLANSWERS: (id: string) => `/profile/${id}/allanswers`,
   REGISTER: "/register",
   DASHBOARD: "/dashboard",
   CATEGORIES: "/categories",
