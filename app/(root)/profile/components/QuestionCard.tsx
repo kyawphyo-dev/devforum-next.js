@@ -3,7 +3,6 @@ import { format } from "date-fns";
 import { QuestionLean } from "@/database/question.model";
 import ROUTES from "@/routes";
 import { CiSquareQuestion } from "react-icons/ci";
-import { RiCharacterRecognitionFill } from "react-icons/ri";
 
 function QuestionCard({ question }: { question: QuestionLean }) {
   return (

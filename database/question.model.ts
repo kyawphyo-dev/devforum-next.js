@@ -8,7 +8,6 @@ export type QuestionLean = {
   content: string;
   tags: ITag[];
   author: IAuthor[];
-  answers: IAnswer[];
   createdAt: string;
   updatedAt: string;
   upvotes?: number;
