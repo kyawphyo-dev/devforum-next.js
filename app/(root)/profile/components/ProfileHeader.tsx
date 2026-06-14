@@ -4,7 +4,14 @@ import ROUTES from "@/routes";
 import { formatDistanceToNow } from "date-fns";
 import { IUserDoc } from "@/database/user.model";
 
-const ProfileHeader = async ({ user }: { user: IUserDoc }) => {
+const ProfileHeader = async ({
+  user,
+  authUserId,
+}: {
+  user: IUserDoc;
+  authUserId: string;
+}) => {
+  const isOwner = authUserId === user._id.toString();
   return (
     <>
       <div className="flex justify-between  border-border pb-5">
@@ -39,9 +46,14 @@ const ProfileHeader = async ({ user }: { user: IUserDoc }) => {
         </div>
         <div className="w-1/5">
           <div>
-            <ButtonLink href={ROUTES.PROFILE_EDIT(user._id.toString())} style="outline">
-              Edit Profile
-            </ButtonLink>
+            {isOwner && (
+              <ButtonLink
+                href={ROUTES.PROFILE_EDIT(user._id.toString())}
+                style="outline"
+              >
+                Edit Profile
+              </ButtonLink>
+            )}
           </div>
         </div>
       </div>

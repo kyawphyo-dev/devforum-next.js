@@ -43,7 +43,7 @@ async function page({
   return (
     <div className="p-5 flex flex-col gap-6">
       <div className="flex justify-between items-center">
-        <h3 className="text-2xl font-bold">All Questions</h3>
+        <h3 className="text-2xl font-bold">All Answers</h3>
       </div>
       <DataRenderer
         success={success}

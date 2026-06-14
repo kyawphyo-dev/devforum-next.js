@@ -9,6 +9,7 @@ import { MdOutlineCategory } from "react-icons/md";
 import { BiCategory } from "react-icons/bi";
 import ROUTES from "@/routes";
 import { BsBookmarks } from "react-icons/bs";
+import { FaUsers } from "react-icons/fa";
 
 const sidebarItems = [
   {
@@ -27,20 +28,25 @@ const sidebarItems = [
     icon: BsBookmarks,
   },
   {
-    label: "Popular",
-    href: "/popular",
-    icon: FaChartLine,
+    label: "Users",
+    href: ROUTES.USERS,
+    icon: FaUsers,
   },
-  {
-    label: "Categories",
-    href: ROUTES.CATEGORIES,
-    icon: MdOutlineCategory,
-  },
-  {
-    label: "All",
-    href: "/all",
-    icon: BiCategory,
-  },
+  // {
+  //   label: "Popular",
+  //   href: "/popular",
+  //   icon: FaChartLine,
+  // },
+  // {
+  //   label: "Categories",
+  //   href: ROUTES.CATEGORIES,
+  //   icon: MdOutlineCategory,
+  // },
+  // {
+  //   label: "All",
+  //   href: "/all",
+  //   icon: BiCategory,
+  // },
 ];
 
 function SidebarLinks() {

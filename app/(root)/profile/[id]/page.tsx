@@ -6,9 +6,18 @@ import { notFound } from "next/navigation";
 import GetUserTopQuestions from "@/lib/actions/GetUserTopQuestions.action";
 import GetUserTopAnswers from "@/lib/actions/GetUserTopAnswers.action";
 import ProfileContents from "../components/ProfileContents";
+import { auth } from "@/auth";
 
 async function page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+
+  const auth_session = await auth();
+  // console.log("From Proifle Page", auth_session);
+  if (!auth_session?.user?.id) {
+    return notFound();
+  }
+  const authUserId = auth_session?.user.id;
+  const isOwner = authUserId === id;
 
   //   Get User
   const result = await GetUser({ UserId: id });
@@ -35,9 +44,9 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
   return (
     <div className="my-15">
       <div className="bg-gray-800/50 rounded-xl p-5">
-        <ProfileHeader user={user} />
+        <ProfileHeader user={user} authUserId={authUserId} />
         <div className="flex gap-3">
-          <AboutSection user={user} />
+          <AboutSection user={user} isOwner={isOwner} />
           <Status
             user={user}
             totalQuestions={totalQuestions}
