@@ -2,6 +2,7 @@ import DataRenderer from "@/components/DataRenderer";
 import Pagination from "@/components/Pagination";
 import { GetUserAllAnswers } from "@/lib/actions/GetUserAllAnswers.action";
 import AnswerCard from "../../components/AnswersCard";
+import { auth } from "@/auth";
 
 async function page({
   params,
@@ -17,6 +18,8 @@ async function page({
   };
 }) {
   const { id } = await params;
+  const auth_session = await auth();
+  const isOwner = auth_session?.user?.id === id;
   const {
     page = 1,
     pageSize = 10,
@@ -51,7 +54,11 @@ async function page({
         errorMessage={message}
         render={(answers) =>
           answers.map((answer) => (
-            <AnswerCard key={answer._id.toString()} answer={answer} />
+            <AnswerCard
+              isOwner={isOwner}
+              key={answer._id.toString()}
+              answer={answer}
+            />
           ))
         }
       />

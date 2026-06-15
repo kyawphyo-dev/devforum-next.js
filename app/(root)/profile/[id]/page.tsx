@@ -58,6 +58,7 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
         userId={id}
         topQuestions={topQuestions}
         topAnswers={topAnswers}
+        isOwner={isOwner}
       />
     </div>
   );

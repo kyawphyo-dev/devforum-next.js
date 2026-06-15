@@ -1,13 +1,8 @@
-import ButtonLink from "@/components/ButtonLink";
 import DataRenderer from "@/components/DataRenderer";
 import Pagination from "@/components/Pagination";
-import PillFilter from "@/components/PillFilter";
-import ThreadCard from "@/components/ThreadCard";
-import { DefaultFilters, HomePageFilters } from "@/constant/filter";
-import { GetQuestions } from "@/lib/actions/GetQuestions.action";
 import { GetUserAllQuestions } from "@/lib/actions/GetUserAllQuestions.action";
-import ROUTES from "@/routes";
 import QuestionCard from "../../components/QuestionCard";
+import { auth } from "@/auth";
 
 async function page({
   params,
@@ -23,6 +18,8 @@ async function page({
   };
 }) {
   const { id } = await params;
+  const auth_session = await auth();
+  const isOwner = auth_session?.user?.id === id;
   const {
     page = 1,
     pageSize = 10,
@@ -57,7 +54,11 @@ async function page({
         errorMessage={message}
         render={(questions) =>
           questions.map((question) => (
-            <QuestionCard key={question._id.toString()} question={question} />
+            <QuestionCard
+              isOwner={isOwner}
+              key={question._id.toString()}
+              question={question}
+            />
           ))
         }
       />

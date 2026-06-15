@@ -1,11 +1,12 @@
 import { IPopulatedAll } from "@/database/question.model";
 import { formatDistanceToNow } from "date-fns";
-import { FaRegComment } from "react-icons/fa";
 import BookMarkCard from "./BookMarkCard";
 import Preview from "./MarkDownPreview";
 import VoteButton from "./VoteButton";
+import { FiEdit2, FiTrash2 } from "react-icons/fi";
+import QuestionActions from "./QuestionActions";
 
-function QuestionDetails(props: IPopulatedAll) {
+function QuestionDetails(props: IPopulatedAll & { userId: string }) {
   const {
     title,
     createdAt,
@@ -17,6 +18,7 @@ function QuestionDetails(props: IPopulatedAll) {
     downvotes,
     answersCount,
   } = props;
+  const isOwner = author._id === props.userId;
   return (
     <div className="rounded-xl border border-border p-9 bg-card space-y-5 shadow-2xl">
       <div className="flex justify-between">
@@ -56,29 +58,14 @@ function QuestionDetails(props: IPopulatedAll) {
         {/* <pre>{content}</pre> */}
       </div>
 
-      <div className="flex items-center gap-4 text-text-muted">
-        {/* <div className="flex items-center gap-1 hover:text-accent transition-colors cursor-pointer">
-          <AiOutlineLike className="text-lg" />
-          <span className="text-sm">{upvotes}</span>
-        </div>
-        <div className="flex items-center gap-1 hover:text-accent transition-colors cursor-pointer">
-          <BiDislike className="text-lg" />
-          <span className="text-sm">{downvotes}</span>
-        </div> */}
+      <div className="flex items-center justify-between gap-4 text-text-muted">
         <VoteButton
           targetId={props._id}
           targetType="question"
           initialDownvotes={downvotes}
           initialUpvotes={upvotes}
         />
-        <div className="flex items-center gap-1 hover:text-success transition-colors cursor-pointer">
-          <FaRegComment className="text-md" />
-          <span className="text-sm">{answersCount || 0}</span>
-        </div>
-        {/* <div className="flex items-center gap-1 hover:text-warning transition-colors cursor-pointer">
-                      <MdOutlineVisibility className="text-lg" />
-                      <span className="text-sm">{question?.views}</span>
-                    </div> */}
+        {isOwner && <QuestionActions questionId={props._id} type="question" />}
       </div>
     </div>
   );

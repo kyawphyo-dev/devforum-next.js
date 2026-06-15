@@ -11,6 +11,7 @@ const ROUTES = {
   CATEGORIES: "/categories",
   QUESTIONS: "/questions",
   QUESTION_DETAILS: (id: string) => `/questions/${id}`,
+  QUESTIONS_EDIT: (id: string) => `/questions/${id}/edit`,
   BOOKMARKS: "/bookmarks",
   USERS: "/users",
 };

@@ -11,10 +11,12 @@ function ProfileContents({
   userId,
   topQuestions,
   topAnswers,
+  isOwner,
 }: {
   userId: string;
   topQuestions: QuestionLean[];
   topAnswers: IAnswerLean[];
+  isOwner: boolean;
 }) {
   const [type, setType] = useState("questions");
   const clickhandle = ({ type }: { type: "questions" | "answers" }) => {
@@ -56,10 +58,16 @@ function ProfileContents({
           </Link>
         </p>
       </div>
-      {type === "questions" && <TopQuestions topQuestions={topQuestions} />}
+      {type === "questions" && (
+        <TopQuestions isOwner={isOwner} topQuestions={topQuestions} />
+      )}
       {type === "answers" &&
         topAnswers.map((answer) => (
-          <AnswerCard key={answer._id.toString()} answer={answer} />
+          <AnswerCard
+            key={answer._id.toString()}
+            answer={answer}
+            isOwner={isOwner}
+          />
         ))}
     </div>
   );

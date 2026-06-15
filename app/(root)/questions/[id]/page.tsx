@@ -8,6 +8,7 @@ import { after } from "next/server";
 import AnswerForm from "../components/AnswerForm";
 import ButtonLink from "@/components/ButtonLink";
 import ROUTES from "@/routes";
+import { auth } from "@/auth";
 
 async function page({
   params,
@@ -17,6 +18,11 @@ async function page({
   searchParams: Promise<{ showAll?: string }>;
 }) {
   const { id } = await params;
+  const auth_session = await auth();
+  if (!auth_session) {
+    return notFound();
+  }
+  const AuthUserId = auth_session.user?.id;
   const { showAll: showAllParam } = await searchParams;
   const showAll = showAllParam === "true";
 
@@ -46,7 +52,7 @@ async function page({
         <ButtonLink href={ROUTES.QUESTIONS}>Create Thread</ButtonLink>
       </div>
       <div className="container mx-auto px-4 ">
-        <QuestionDetails {...question} />
+        <QuestionDetails {...question} userId={AuthUserId} />
       </div>
       <div className="container mx-auto px-4 my-15">
         <AnswersList
