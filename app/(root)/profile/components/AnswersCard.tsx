@@ -33,7 +33,7 @@ function AnswerCard({
       </Link>
       {isOwner && (
         <div>
-          <QuestionActions questionId={answer.question} type="answer" />
+          <QuestionActions questionId={answer._id} type="answer" />
         </div>
       )}
     </div>
